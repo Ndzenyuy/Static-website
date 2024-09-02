@@ -12,7 +12,7 @@ pipeline {
         stage('Run docker Container'){
             steps{
                 script{
-                    sh 'docker run -d -p 80:80 staticWeb:${BUILD_ID}'
+                    sh 'docker run -d -p 80:80 ndzenyuy/staticweb:${BUILD_ID}'
                 }
             }
         }
