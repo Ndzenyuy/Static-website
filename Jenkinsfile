@@ -5,10 +5,15 @@ pipeline {
             steps{
                 script{
                     sh 'sudo rm -rf /var/www/html/*'
-                    sh 'ls'
                     sh 'sudo cp -r . /var/www/html/'
                     sh 'sudo systemctl restart apache2'
                 }
+            }
+        }
+
+        stage('Run') {
+            steps{
+
             }
         }
     }
