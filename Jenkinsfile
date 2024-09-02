@@ -9,6 +9,14 @@ pipeline {
             }
         }
 
+        stage('Stop any running containers'){
+            steps{
+                script{
+                    sh 'docker stop $(docker ps -q)'
+                }
+            }
+        }
+
         stage('Run docker Container'){
             steps{
                 script{
