@@ -10,11 +10,6 @@ pipeline {
                 }
             }
         }
-
-        stage('Run') {
-            steps{
-
-            }
-        }
+        
     }
 }
