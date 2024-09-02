@@ -1,12 +1,18 @@
 pipeline {
     agent any
     stages{
-        stage('Deploy to server'){
+        stage('Build docker image'){
             steps{
                 script{
-                    sh 'sudo rm -rf /var/www/html/*'
-                    sh 'sudo cp -r . /var/www/html/'
-                    sh 'sudo systemctl restart apache2'
+                    sh 'docker buildx build --tag staticWeb:${BUILD_ID} .'
+                }
+            }
+        }
+
+        stage('Run docker Container'){
+            steps{
+                script{
+                    sh 'docker run -d -p 80:80 staticWeb:${BUILD_ID}'
                 }
             }
         }
