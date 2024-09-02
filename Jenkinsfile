@@ -5,7 +5,8 @@ pipeline {
             steps{
                 script{
                     sh 'sudo rm -rf /var/www/html/*'
-                    sh 'sudo cp -r Static-website/ /var/www/html/'
+                    sh 'ls'
+                    sh 'sudo cp -r "Static-website/" /var/www/html/'
                     sh 'sudo systemctl restart apache2'
                 }
             }
