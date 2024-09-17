@@ -1,29 +1,35 @@
 pipeline {
     agent any
     stages{
-        stage('Build docker image'){
+        /*stage('Build docker image'){
             steps{
                 script{
                     sh 'docker buildx build --tag ndzenyuy/staticweb:${BUILD_ID} .' 
                 }
             }
-        }
+        }*/
 
-        stage('Stop any running containers'){
-            steps{
-                script{
-                    sh 'docker stop $(docker ps -q)'
+        stage('Build Docker Image'){
+            steps {
+                script {
+                    dockerImage = docker.build( "ndzenyuy/staticwebsite" + ":$BUILD_NUMBER", ".")
                 }
             }
         }
 
-        stage('Run docker Container'){
-            steps{
-                script{
-                    sh 'docker run -d -p 80:80 ndzenyuy/staticweb:${BUILD_ID}'
-                }
+        stage('Upload App Image') {
+          steps{
+            script {
+               withDockerRegistry([ credentialsId: "dockerlogin", url: ""]){
+                dockerImage.push("$BUILD_NUMBER")
+                dockerImage.push('latest')
+               }              
+              
             }
-        }
+          }
+        } 
+
+        
         
     }
 }
