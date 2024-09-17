@@ -31,8 +31,8 @@ pipeline {
 
        stage ("CLEAN WORKSPACE"){
             steps{
-                sh 'docker rmi ndzenyuy/ecommerce:${BUILD_ID}'  
-                sh 'docker rmi ndzenyuy/ecommerce:latest'               
+                sh 'docker rmi ndzenyuy/staticwebsite:${BUILD_ID}'  
+                sh 'docker rmi ndzenyuy/staticwebsite:latest'               
                 
             }
         } 
